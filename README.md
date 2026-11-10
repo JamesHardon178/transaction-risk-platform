@@ -243,7 +243,7 @@ pytest -q                                   # 58 个用例
 
 ## 13. 文档与诚信约束
 
-- 文档：`docs/architecture.md`（模块关系）、`docs/data_dictionary.md`（字段字典）、`docs/demo_guide.md`（5 分钟演示流程）、`docs/resume_project.md`（简历项目描述）、`docs/interview_qa.md`（15 道面试题）、阶段报告 `reports/stage*.md`
+- 文档：`docs/architecture.md`（模块关系）、`docs/data_dictionary.md`（字段字典）、`docs/demo_guide.md`（5 分钟演示流程），阶段报告见 `reports/stage*.md`
 - 诚信约束：
   1. 全部数字来自真实数据与实跑代码，不虚构、不修饰；
   2. 原始数据只读（`data/raw/`，系统级只读属性）；
@@ -260,3 +260,27 @@ pytest -q                                   # 58 个用例
 | 风险阈值分析 | `docs/screenshots/03_threshold.png` | 阈值滑块实时重算 P/R/F1 与混淆矩阵、阈值曲线 |
 | 策略成本优化 | `docs/screenshots/04_strategy.png` | 成本参数可改、三策略重算、成本曲线、敏感性 |
 | 风险分析报告 | `docs/screenshots/05_report.png` | 冻结策略、验证/测试差异、成本假设、局限性 |
+
+## 15. 关键图表
+
+**三模型指标对比（验证集）**：RF 在 PR-AUC / F1 / Recall 上均最优，因此入选最终模型。
+
+![三模型对比](reports/figures/fig12_model_comparison.png)
+
+**验证集 PR 曲线**：正类占比 0.13% 时 PR 曲线比 ROC 更能区分模型。
+
+![验证集 PR 曲线](reports/figures/fig10_val_pr.png)
+
+**阈值—成本曲线**：成本在 0.144 处取到最小值 735，默认 0.5 对应 1,400。
+
+![阈值成本曲线](reports/figures/fig17_cost_curve.png)
+
+**三策略成本对比**：保守 / 平衡 / 激进三档在漏判 100、误拦 5 假设下的成本。
+
+![策略成本对比](reports/figures/fig18_strategy_comparison.png)
+
+**成本比敏感性**：漏判/误拦成本比从 1:1 到 1000:1，最优阈值从 0.409 单调降到 0.017。
+
+![敏感性分析](reports/figures/fig19_sensitivity_line.png)
+
+其余图表见 `reports/figures/`（共 21 张），完整分析过程见 `notebooks/`。
