@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-11-08 23:03:31",
+  "random_state": 42,
+  "primary_metric": "pr_auc",
+  "threshold": 0.5,
+  "dedup": {
+    "n_dup_rows": 1854,
+    "n_dup_groups": 773,
+    "size_distribution": {
+      "2": 611,
+      "4": 81,
+      "3": 66,
+      "5": 10,
+      "9": 2,
+      "18": 2,
+      "6": 1
+    },
+    "n_class_conflict": 0,
+    "n_to_drop": 1081
+  },
+  "splits": [
+    {
+      "数据集": "train",
+      "记录数": 198608,
+      "欺诈数": 366,
+      "正常数": 198242,
+      "欺诈率": 0.0018428260694433255,
+      "Time范围": "[0, 132906]"
+    },
+    {
+      "数据集": "val",
+      "记录数": 42559,
+      "欺诈数": 55,
+      "正常数": 42504,
+      "欺诈率": 0.0012923235978288964,
+      "Time范围": "[132906, 151320]"
+    },
+    {
+      "数据集": "test",
+      "记录数": 42559,
+      "欺诈数": 52,
+      "正常数": 42507,
+      "欺诈率": 0.001221833219765502,
+      "Time范围": "[151320, 172792]"
+    }
+  ],
+  "best_params": {
+    "Logistic Regression": {
+      "C": 1.0
+    },
+    "Random Forest": {
+      "n_estimators": 400,
+      "max_depth": 14
+    },
+    "XGBoost": {
+      "scale_pos_weight": 541.6448087431694,
+      "best_iteration": 93,
+      "best_val_aucpr": 0.8643605071542976,
+      "params": {
+        "learning_rate": 0.1,
+        "max_depth": 4
+      },
+      "val_pr_auc": 0.8646190160883358
+    }
+  },
+  "metrics": {
+    "val": {
+      "Logistic Regression": {
+        "threshold": 0.5,
+        "precision": 0.05019685039370079,
+        "recall": 0.9272727272727272,
+        "f1": 0.09523809523809523,
+        "roc_auc": 0.9824371609944733,
+        "pr_auc": 0.8366699743386363,
+        "confusion_matrix": [
+          [
+            41539,
+            965
+          ],
+          [
+            4,
+            51
+          ]
+        ],
+        "tn": 41539,
+        "fp": 965,
+        "fn": 4,
+        "tp": 51,
+        "n": 42559,
+        "n_pos": 55
+      },
+      "Random Forest": {
+        "threshold": 0.5,
+        "precision": 1.0,
+        "recall": 0.7454545454545455,
+        "f1": 0.8541666666666666,
+        "roc_auc": 0.9663608130999435,
+        "pr_auc": 0.8734842951568298,
+        "confusion_matrix": [
+          [
+            42504,
+            0
+          ],
+          [
+            14,
+            41
+          ]
+        ],
+        "tn": 42504,
+        "fp": 0,
+        "fn": 14,
+        "tp": 41,
+        "n": 42559,
+        "n_pos": 55
+      },
+      "XGBoost": {
+        "threshold": 0.5,
+        "precision": 0.41379310344827586,
+        "recall": 0.8727272727272727,
+        "f1": 0.5614035087719298,
+        "roc_auc": 0.9886380747052684,
+        "pr_auc": 0.8646190160883358,
+        "confusion_matrix": [
+          [
+            42436,
+            68
+          ],
+          [
+            7,
+            48
+          ]
+        ],
+        "tn": 42436,
+        "fp": 68,
+        "fn": 7,
+        "tp": 48,
+        "n": 42559,
+        "n_pos": 55
+      }
+    },
+    "test": {
+      "Logistic Regression": {
+        "threshold": 0.5,
+        "precision": 0.05605095541401274,
+        "recall": 0.8461538461538461,
+        "f1": 0.10513739545997611,
+        "roc_auc": 0.9773462651400402,
+        "pr_auc": 0.7100972214737731,
+        "confusion_matrix": [
+          [
+            41766,
+            741
+          ],
+          [
+            8,
+            44
+          ]
+        ],
+        "tn": 41766,
+        "fp": 741,
+        "fn": 8,
+        "tp": 44,
+        "n": 42559,
+        "n_pos": 52
+      },
+      "Random Forest": {
+        "threshold": 0.5,
+        "precision": 0.9069767441860465,
+        "recall": 0.75,
+        "f1": 0.8210526315789474,
+        "roc_auc": 0.9668396246048161,
+        "pr_auc": 0.7819839477766085,
+        "confusion_matrix": [
+          [
+            42503,
+            4
+          ],
+          [
+            13,
+            39
+          ]
+        ],
+        "tn": 42503,
+        "fp": 4,
+        "fn": 13,
+        "tp": 39,
+        "n": 42559,
+        "n_pos": 52
+      },
+      "XGBoost": {
+        "threshold": 0.5,
+        "precision": 0.4105263157894737,
+        "recall": 0.75,
+        "f1": 0.5306122448979592,
+        "roc_auc": 0.983172681060676,
+        "pr_auc": 0.7568638618432081,
+        "confusion_matrix": [
+          [
+            42451,
+            56
+          ],
+          [
+            13,
+            39
+          ]
+        ],
+        "tn": 42451,
+        "fp": 56,
+        "fn": 13,
+        "tp": 39,
+        "n": 42559,
+        "n_pos": 52
+      }
+    }
+  },
+  "final_model_by_val_pr_auc": "Random Forest",
+  "predictions_files": [
+    "data\\processed\\predictions_val_lr.csv",
+    "data\\processed\\predictions_val_rf.csv",
+    "data\\processed\\predictions_val_xgb.csv",
+    "data\\processed\\predictions_test_lr.csv",
+    "data\\processed\\predictions_test_rf.csv",
+    "data\\processed\\predictions_test_xgb.csv"
+  ]
+}

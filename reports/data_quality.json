@@ -1,0 +1,126 @@
+{
+  "generated_at": "2026-11-06 22:34:36",
+  "file": {
+    "csv_path": "data/raw/creditcard.csv",
+    "csv_size_bytes": 150828752,
+    "csv_sha256": "76274b691b16a6c49d3f159c883398e03ccd6d1ee12d9d8ee38f4b4b98551a89",
+    "zip_size_bytes": 69155672,
+    "zip_sha256": "a0360ce715992212e9ac72d8ccdca97f4be87dc1fdf2bed011358f7ab409a28a"
+  },
+  "structure": {
+    "n_rows": 284807,
+    "n_cols": 31,
+    "columns": [
+      "Time",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6",
+      "V7",
+      "V8",
+      "V9",
+      "V10",
+      "V11",
+      "V12",
+      "V13",
+      "V14",
+      "V15",
+      "V16",
+      "V17",
+      "V18",
+      "V19",
+      "V20",
+      "V21",
+      "V22",
+      "V23",
+      "V24",
+      "V25",
+      "V26",
+      "V27",
+      "V28",
+      "Amount",
+      "Class"
+    ],
+    "dtype_counts": {
+      "float64": 30,
+      "int64": 1
+    },
+    "non_numeric_cols": []
+  },
+  "missing": {
+    "total_missing_cells": 0,
+    "cols_with_missing": {},
+    "missing_ratio": 0.0
+  },
+  "duplicates": {
+    "full_duplicate_rows": 1081,
+    "full_duplicate_ratio": 0.00379555277784605,
+    "duplicates_that_are_fraud": 19,
+    "fraud_rows_after_dedup": 473,
+    "duplicate_rows_share_time_with_original": 1081
+  },
+  "label": {
+    "unique_values": [
+      0,
+      1
+    ],
+    "count_0": 284315,
+    "count_1": 492,
+    "ratio_0": 0.9982725143693799,
+    "ratio_1": 0.001727485630620034,
+    "imbalance_ratio": 577.8760162601626
+  },
+  "time": {
+    "min_seconds": 0.0,
+    "max_seconds": 172792.0,
+    "span_hours": 47.99777777777778,
+    "is_monotonic_increasing": true,
+    "duplicated_timestamps": 160215,
+    "seconds_with_multiple_tx": 79429,
+    "max_tx_in_one_second": 36,
+    "zero_diff_count": 160215
+  },
+  "amount": {
+    "min": 0.0,
+    "p25": 5.6,
+    "median": 22.0,
+    "mean": 88.34961925093134,
+    "p75": 77.16499999999999,
+    "p99": 1017.9700000000012,
+    "p999": 3000.0,
+    "max": 25691.16,
+    "std": 250.12010924018855,
+    "zero_amount_count": 1825,
+    "zero_amount_ratio": 0.006407848121710491,
+    "iqr_upper_fence": 184.5125,
+    "outliers_by_iqr": 31904,
+    "outlier_ratio_by_iqr": 0.11201971861646659,
+    "skewness": 16.977724453761006,
+    "kurtosis": 845.0926455465267
+  },
+  "v_features": {
+    "n_features": 28,
+    "abs_mean_max": 4.866698941746315e-15,
+    "mean_range": [
+      -2.4141892388190378e-15,
+      4.866698941746315e-15
+    ],
+    "std_range": [
+      0.3300832641602509,
+      1.958695803857486
+    ],
+    "abs_min_of_data": 9.59898436743434e-08,
+    "abs_max_of_data": 120.589493945238,
+    "n_features_with_zero_variance": 0
+  },
+  "issues": [
+    "无缺失值，无需插补。",
+    "存在 1081 行完全重复记录（0.3796%），其中 19 行的 Class=1。建模前需去重，否则同一条记录可能同时落入训练集与验证集，造成指标虚高。",
+    "存在 1825 笔金额为 0 的交易（0.641%）。数据集未提供交易类型字段，无法证实这些 0 元交易的业务性质（可能是余额查询、预授权或冲正），因此不做业务归因，仅在特征工程中单独标记为 `is_zero_amount`，避免与真实小额交易混同。",
+    "Time 仅覆盖 48 小时（约 2 天），无法做季节性/星期效应分析，且 Time 是相对秒数而非真实时钟，不能还原具体时刻。",
+    "V1–V28 为 PCA 变换后的匿名特征，仅保留数值信息，不可赋予业务含义；其背后的原始字段（商户、卡种、地区等）未公开，因此无法做业务归因。",
+    "类别极不平衡：欺诈占比 0.1727%（1:578）。后续建模禁止使用 Accuracy 作为主指标。"
+  ]
+}

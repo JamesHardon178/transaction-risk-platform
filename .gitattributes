@@ -1,0 +1,10 @@
+# 统一换行，避免跨平台 diff 噪音
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary
+
+# Notebook 保留 JSON 文本可比对性
+*.ipynb text eol=lf

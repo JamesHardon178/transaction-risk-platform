@@ -1,0 +1,34 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ---- 虚拟环境 ----
+.venv/
+venv/
+
+# ---- 数据（严禁入库：体积大 + 可能含敏感字段）----
+data/raw/*
+data/interim/*
+data/processed/*
+!data/**/.gitkeep
+
+# ---- 产物 ----
+# 说明：reports/figures 下的图表保留入库（约 1.7MB），
+#       供 README / docs 直接引用与离线浏览；仅忽略大体量 HTML 交互图
+reports/figures/*.html
+models/*.pkl
+models/*.joblib
+!**/.gitkeep
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---- 环境变量与密钥 ----
+.env
+*.local
