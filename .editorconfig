@@ -1,0 +1,25 @@
+root = true
+
+# 统一 UTF-8 + LF：仓库里全是源码与 Markdown，CRLF 会让 diff 出现整文件改动
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+
+[*.{yml,yaml,toml,json}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+# Markdown 里行尾两个空格是换行语法，不能裁
+trim_trailing_whitespace = false
+
+# Windows 批处理必须是 CRLF，否则 cmd.exe 会吃掉行首字符
+[*.{bat,cmd}]
+end_of_line = crlf
