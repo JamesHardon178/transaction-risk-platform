@@ -1,0 +1,31 @@
+[project]
+name = "transaction-risk-platform"
+version = "0.1.1"
+description = "基于交易数据的风险识别与策略优化分析平台：EDA/SQL → 三模型对比 → 阈值-成本-策略优化 → Streamlit 看板"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [{ name = "杨斌" }]
+keywords = ["fraud-detection", "imbalanced-learning", "cost-sensitive", "streamlit"]
+classifiers = [
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+# 说明：本项目是分析平台而非待分发的库，运行依赖统一由 requirements.txt 维护
+#      （顶层锁定）与 requirements-lock.txt（130 包全量锁定）保证可复现，
+#      因此这里不重复声明 dependencies，避免两处版本号漂移。
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+# 数据、产物、Notebook 不参与静态检查（Notebook 内的单元由 nbconvert 执行验证）
+extend-exclude = ["data", "reports", "notebooks", ".venv"]
+
+[tool.ruff.lint]
+# 只启用"几乎不可能误报"的规则集：语法错误、未定义名、未使用导入。
+# 行宽交给 line-length 统一约束，格式类规则不在 CI 中阻塞（避免噪音提交）。
+select = ["E4", "E7", "E9", "F"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# tests/test_app.py 依赖 data/processed 下的清洗后 parquet 与预测文件，
+# 二者均按设计不入库；无数据环境下用 --ignore=tests/test_app.py 跳过（见 docs/development.md）。
