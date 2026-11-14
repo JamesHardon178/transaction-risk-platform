@@ -29,8 +29,10 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPORTS = PROJECT_ROOT / "reports"
 
-# Markdown 行内链接与图片：[text](target) / ![alt](target)
-LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+# Markdown 链接目标：只匹配 `](target)` 这一段。
+# 不写成 `[text](target)` 是因为徽章形如 [![alt](img)](url)——方括号里再套方括号，
+# 一次性匹配整个链接会漏掉外层目标；只认右括号前的目标串则两类写法都能覆盖。
+LINK_PATTERN = re.compile(r"\]\(\s*<?([^)\s>]+)")
 SKIP_PREFIXES = ("http://", "https://", "mailto:", "#", "tel:")
 
 # 被 README 正文、Streamlit 看板或测试引用的档案；缺任何一个都算结构性问题
@@ -76,10 +78,12 @@ def check_links() -> list[str]:
     checked = 0
     for md_path in iter_markdown_files():
         text = md_path.read_text(encoding="utf-8", errors="replace")
+        seen: set[str] = set()
         for raw_target in LINK_PATTERN.findall(text):
             target = raw_target.strip("<>").split("#", 1)[0]
-            if not target or target.startswith(SKIP_PREFIXES):
+            if not target or target.startswith(SKIP_PREFIXES) or target in seen:
                 continue
+            seen.add(target)
             checked += 1
             resolved = (md_path.parent / target).resolve()
             if not resolved.exists():
