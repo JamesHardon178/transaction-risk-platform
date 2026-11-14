@@ -27,13 +27,12 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.data.predictions import load_predictions                       # noqa: E402
 from src.rules.cost import (                                            # noqa: E402
-    DEFAULT_COST_FN, DEFAULT_COST_FP, cost_curve, grid_matrix,
+    DEFAULT_COST_FN, DEFAULT_COST_FP, grid_matrix,
     optimal_row, sensitivity_grid, sensitivity_scan, with_cost,
 )
 from src.rules.strategies import (                                       # noqa: E402
     AGGRESSIVE_PRECISION_TARGET, BASELINE_MODEL, COMPARISON_MODEL,
-    CONSERVATIVE_RECALL_TARGET, PRIMARY_MODEL, STRATEGY_ORDER,
-    build_strategies, evaluate_frozen, freeze_strategy, val_test_delta,
+    CONSERVATIVE_RECALL_TARGET, PRIMARY_MODEL, build_strategies, evaluate_frozen, freeze_strategy, val_test_delta,
 )
 from src.rules.thresholds import (                                       # noqa: E402
     SPEC_THRESHOLDS, build_threshold_grid, scan_thresholds,

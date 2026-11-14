@@ -5,7 +5,7 @@ from __future__ import annotations
 import pandas as pd
 import streamlit as st
 
-from app.common import FIGURES, fmt_int, load_analysis_json, load_strategy_csv
+from app.common import FIGURES, load_analysis_json, load_strategy_csv
 
 
 def render() -> None:

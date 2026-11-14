@@ -86,7 +86,7 @@ def main() -> None:
             "SELECT COUNT(*) FROM transactions WHERE amount IS NULL OR time_sec IS NULL;"
         ).fetchone()[0]
         print(f"  关键字段空值    : {nn}")
-        print(f"\n[表结构]")
+        print("\n[表结构]")
         for row in con.execute("PRAGMA table_info(transactions);").fetchall():
             print(f"  {row[1]:<10s} {row[2]}")
         idx = con.execute(

@@ -1,6 +1,5 @@
 """数据准备模块的单元测试（纯合成数据，不依赖原始 CSV）。"""
 
-import numpy as np
 import pandas as pd
 import pytest
 
