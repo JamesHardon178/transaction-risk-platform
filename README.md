@@ -1,5 +1,10 @@
 # 基于交易数据的风险识别与策略优化分析平台
 
+[![CI](https://github.com/JamesHardon178/transaction-risk-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/JamesHardon178/transaction-risk-platform/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/python-3.13-blue)](requirements.txt)
+[![LICENSE](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![CHANGELOG](https://img.shields.io/badge/changelog-keep%20a%20changelog-orange)](CHANGELOG.md)
+
 > 信用卡欺诈是典型的**极端类别不平衡**问题（欺诈仅占 0.17%）：
 > 把所有交易判为"正常"就有 99.83% 的 Accuracy，却漏掉每一笔真实损失。
 > 本项目从一份真实的两天交易流水出发，完成
@@ -40,6 +45,7 @@
 - **可视化**：Matplotlib、Seaborn、Plotly（交互图）
 - **应用**：Streamlit 1.66.1（五页看板 + 官方 AppTest 渲染测试）
 - **质量保障**：pytest 9.2.0（58 用例）、Jupyter nbconvert 从头执行验证
+- **工程化**：ruff 0.17.5 静态检查（E4/E7/E9/F）+ GitHub Actions（lint / compile / test 三 job）+ `scripts/check_repo_health.py` 仓库自检
 - 完整锁定见 `requirements.txt`（顶层）与 `requirements-lock.txt`（130 包全量）
 
 ## 4. 整体架构
@@ -226,7 +232,7 @@ pytest -q                                   # 58 个用例
 | pytest | **58/58 通过**（15.0s） |
 | Notebook 01 | 从头执行 43 单元零报错，7 图内嵌 |
 | Notebook 02 | 从头执行 30 单元零报错，7 图内嵌，指标与归档一致（确定性复现） |
-| SQL | 9 条查询重跑，`sql_results.md` 逐字节一致（md5 相同） |
+| SQL | 9 条查询重跑，`reports/sql_results.md` 逐字节一致（md5 相同） |
 | 指标一致性 | 由预测文件独立复算 P/R/F1/ROC-AUC/PR-AUC，与 `model_metrics.json` 最大偏差 1.1e-16 |
 | 阈值/成本复现 | 独立复算最优阈值 0.144/成本 735、三策略、冻结测试集评估（成本 1,465），与档案一致 |
 | Streamlit | 五页全部渲染正常（截图见 `docs/screenshots/`），AppTest 7 项通过 |
@@ -243,7 +249,7 @@ pytest -q                                   # 58 个用例
 
 ## 13. 文档与诚信约束
 
-- 文档：`docs/architecture.md`（模块关系）、`docs/data_dictionary.md`（字段字典）、`docs/demo_guide.md`（5 分钟演示流程），阶段报告见 `reports/stage*.md`
+- 文档：`docs/architecture.md`（模块关系）、`docs/data_dictionary.md`（字段字典）、`docs/demo_guide.md`（5 分钟演示流程）、`docs/development.md`（验证阶梯与提交规范），阶段报告见 `reports/stage*.md`，版本变更见 `CHANGELOG.md`
 - 诚信约束：
   1. 全部数字来自真实数据与实跑代码，不虚构、不修饰；
   2. 原始数据只读（`data/raw/`，系统级只读属性）；
