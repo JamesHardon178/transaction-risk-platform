@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -34,8 +35,6 @@ def save_predictions(
 
     df_source 必须含 Time/Amount/Class 列，且行序与 y_proba 一一对应。
     """
-    import numpy as np
-
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     proba = np.asarray(y_proba, dtype=float)
@@ -67,8 +66,6 @@ def load_predictions(
 
     校验：文件存在、字段齐全、Class 只含 0/1、概率落在 [0,1]。
     """
-    import numpy as np
-
     if split_name not in ("val", "test"):
         raise ValueError(f'split_name 只能是 "val" 或 "test"，收到 {split_name!r}')
 
